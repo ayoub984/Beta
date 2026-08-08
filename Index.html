@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BlueCraft Store</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Background -->
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="nav-left">
+            <div class="logo">
+                <span class="logo-icon">◆</span>
+                <span>BlueCraft</span>
+            </div>
+
+            <nav>
+                <a href="#store">Store</a>
+                <a href="#ranks">Ranks</a>
+                <a href="#spawners">Spawners</a>
+                <a href="#shards">Shards</a>
+            </nav>
+        </div>
+
+        <div class="nav-right">
+            <button class="server-status">
+                <span class="status-dot"></span>
+                <span id="serverStatus">Server Online</span>
+            </button>
+
+            <button class="cart-button" id="openCart">
+                🛒
+                <span class="cart-count" id="cartCount">0</span>
+            </button>
+        </div>
+    </header>
+
+
+    <!-- HERO -->
+    <main>
+
+        <section class="hero" id="store">
+
+            <div class="hero-content">
+
+                <div class="badge">
+                    ⚡ Official Server Store
+                </div>
+
+                <h1>
+                    Upgrade your
+                    <span>adventure.</span>
+                </h1>
+
+                <p>
+                    Get exclusive ranks, shards and spawners
+                    for your Minecraft account.
+                </p>
+
+                <!-- PLAYER TYPE -->
+                <div class="player-selector">
+
+                    <p>Choose your edition</p>
+
+                    <div class="edition-buttons">
+
+                        <button class="edition active" data-edition="Java">
+                            <span>☕</span>
+                            Java Edition
+                        </button>
+
+                        <button class="edition" data-edition="Bedrock">
+                            <span>◆</span>
+                            Bedrock
+                        </button>
+
+                    </div>
+
+                    <div class="selected-edition">
+                        Selected:
+                        <strong id="selectedEdition">Java</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="hero-card">
+
+                <div class="minecraft-cube">
+                    <div class="cube-face front"></div>
+                    <div class="cube-face back"></div>
+                    <div class="cube-face left"></div>
+                    <div class="cube-face right"></div>
+                    <div class="cube-face top"></div>
+                    <div class="cube-face bottom"></div>
+                </div>
+
+                <div>
+                    <span class="small-text">CURRENT PLAYERS</span>
+                    <h2 id="playerCount">1,248</h2>
+                    <span class="online-text">Players online</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- STORE -->
+        <section class="store-section">
+
+            <div class="section-heading">
+                <div>
+                    <span class="section-label">STORE</span>
+                    <h2>Choose your upgrade</h2>
+                </div>
+
+                <div class="category-buttons">
+                    <button class="category active" data-category="all">All</button>
+                    <button class="category" data-category="ranks">Ranks</button>
+                    <button class="category" data-category="spawners">Spawners</button>
+                    <button class="category" data-category="shards">Shards</button>
+                </div>
+            </div>
+
+
+            <div class="products" id="products"></div>
+
+        </section>
+
+
+        <!-- RECENT PURCHASES -->
+        <section class="recent-section">
+
+            <div class="section-heading">
+                <div>
+                    <span class="section-label">LIVE ACTIVITY</span>
+                    <h2>Recent purchases</h2>
+                </div>
+
+                <span class="live-indicator">
+                    <span></span>
+                    LIVE
+                </span>
+            </div>
+
+            <div class="purchases" id="recentPurchases"></div>
+
+        </section>
+
+    </main>
+
+
+    <!-- CART SIDEBAR -->
+    <div class="overlay" id="overlay"></div>
+
+    <aside class="cart-sidebar" id="cartSidebar">
+
+        <div class="cart-header">
+            <div>
+                <span class="section-label">YOUR CART</span>
+                <h2>Shopping Cart</h2>
+            </div>
+
+            <button class="close-cart" id="closeCart">×</button>
+        </div>
+
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart">
+                <div>🛒</div>
+                <h3>Your cart is empty</h3>
+                <p>Add something from the store.</p>
+            </div>
+        </div>
+
+        <div class="cart-footer">
+
+            <div class="cart-total">
+                <span>Total</span>
+                <strong id="cartTotal">€0.00</strong>
+            </div>
+
+            <button class="checkout-button" id="checkoutButton">
+                Continue to checkout →
+            </button>
+
+            <small>
+                Secure checkout • Instant delivery
+            </small>
+
+        </div>
+
+    </aside>
+
+
+    <!-- CHECKOUT MODAL -->
+    <div class="modal-overlay" id="checkoutModal">
+
+        <div class="checkout-modal">
+
+            <button class="modal-close" id="closeCheckout">×</button>
+
+            <span class="section-label">CHECKOUT</span>
+
+            <h2>Complete your purchase</h2>
+
+            <p class="modal-description">
+                Enter your Minecraft username to receive your items.
+            </p>
+
+            <label>Minecraft Username</label>
+            <input
+                type="text"
+                id="minecraftUsername"
+                placeholder="YourMinecraftName"
+                maxlength="32"
+            >
+
+            <div class="checkout-edition">
+                <span>Edition</span>
+                <strong id="checkoutEdition">Java</strong>
+            </div>
+
+            <div class="checkout-summary">
+                <span>Total</span>
+                <strong id="checkoutTotal">€0.00</strong>
+            </div>
+
+            <button class="pay-button" id="payButton">
+                Continue to payment →
+            </button>
+
+            <p class="secure-note">
+                🔒 Secure payment • Your information is protected
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <footer>
+        <div class="footer-logo">◆ BlueCraft</div>
+
+        <p>
+            © 2026 BlueCraft. Not affiliated with Mojang or Microsoft.
+        </p>
+
+        <div class="footer-links">
+            <a href="#">Terms</a>
+            <a href="#">Privacy</a>
+            <a href="#">Discord</a>
+        </div>
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
